@@ -117,6 +117,10 @@ bool Message::isInitialValue() const {
     return message_->is_initial();
 }
 
+std::shared_ptr<vsomeip::message> Message::getMessage() const {
+    return message_;
+}
+
 byte_t *
 Message::getBodyData() const {
     std::shared_ptr<vsomeip::payload> payload = message_->get_payload();

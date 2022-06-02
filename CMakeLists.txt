@@ -4,8 +4,24 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 cmake_minimum_required (VERSION 2.8)
+set(CMAKE_BUILD_TYPE "Debug")
 
 project (CommonAPI-SomeIP)
+
+# Download automatically, you can also just copy the conan.cmake file
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
+                  "${CMAKE_BINARY_DIR}/conan.cmake")
+endif()
+
+include(${CMAKE_BINARY_DIR}/conan.cmake)
+
+conan_cmake_run(REQUIRES VSOMEIP/3.0.0.4
+                CommonAPI/3.2.0.1
+                BASIC_SETUP CMAKE_TARGETS
+                BUILD missing
+                )
 
 set (CMAKE_VERBOSE_MAKEFILE off)
 
@@ -45,28 +61,6 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE STRING "Choose the type of build." FORCE)
   # Set the possible values of build type for cmake-gui
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
-endif()
-
-if (MSVC)
-# Boost
-find_package( Boost 1.55 COMPONENTS system thread log REQUIRED )
-if(Boost_FOUND)
-  if(Boost_LIBRARY_DIR)
-    MESSAGE( STATUS "Boost_LIBRARY_DIR not empty using it: ${Boost_LIBRARY_DIR}" )
-  else()
-    if(BOOST_LIBRARYDIR)
-      MESSAGE( STATUS "Boost_LIBRARY_DIR empty but BOOST_LIBRARYDIR is set setting Boost_LIBRARY_DIR to: ${BOOST_LIBRARYDIR}" )
-      set(Boost_LIBRARY_DIR ${BOOST_LIBRARYDIR})
-    endif()
-  endif()
-else()
-  MESSAGE( STATUS "Boost was not found!")
-endif()
-include_directories( ${Boost_INCLUDE_DIR} )
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_CRT_SECURE_NO_WARNINGS /wd4503")
-link_directories(${Boost_LIBRARY_DIR})
-else()
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector -fasynchronous-unwind-tables -fno-omit-frame-pointer -DCOMMONAPI_INTERNAL_COMPILATION -D_GLIBCXX_USE_NANOSLEEP -DBOOST_LOG_DYN_LINK -pthread -fvisibility=hidden")
 endif()
 
 SET(MAX_LOG_LEVEL "DEBUG" CACHE STRING "maximum log level")
@@ -115,19 +109,6 @@ endforeach ()
 
 ###################################################################################################
 
-if ("${USE_INSTALLED_COMMONAPI}" STREQUAL "ON")
-    FIND_PACKAGE(CommonAPI 3.2.0 REQUIRED CONFIG NO_CMAKE_PACKAGE_REGISTRY)
-else()
-    FIND_PACKAGE(CommonAPI 3.2.0 REQUIRED CONFIG NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_SYSTEM_PATH)
-endif()
-
-message(STATUS "CommonAPI_CONSIDERED_CONFIGS: ${CommonAPI_CONSIDERED_CONFIGS}")
-message(STATUS "COMMONAPI_INCLUDE_DIRS: ${COMMONAPI_INCLUDE_DIRS}")
-message(STATUS "CommonAPI Version: ${CommonAPI_VERSION}")
-
-find_package (vsomeip3 3.1.0 REQUIRED)
-message(STATUS "Using vsomeip3 - v${vsomeip3_VERSION}")
-
 include_directories (
     include
     ${Boost_INCLUDE_DIR}
@@ -141,7 +122,7 @@ list (SORT CommonAPI-SomeIP_SRC)
 # CommonAPI
 add_library (CommonAPI-SomeIP SHARED ${CommonAPI-SomeIP_SRC})
 set_target_properties (CommonAPI-SomeIP PROPERTIES VERSION ${COMPONENT_VERSION} SOVERSION ${COMPONENT_VERSION})
-target_link_libraries (CommonAPI-SomeIP CommonAPI ${VSOMEIP_LIBRARIES})
+target_link_libraries (CommonAPI-SomeIP CONAN_PKG::CommonAPI CONAN_PKG::VSOMEIP)
 
 if (MSVC)
     target_link_libraries(CommonAPI-SomeIP ws2_32 Rpcrt4)

@@ -52,6 +52,8 @@ class Message {
     COMMONAPI_EXPORT bool isRequestNoResponseType() const;
     COMMONAPI_EXPORT bool isInitialValue() const;
 
+    COMMONAPI_EXPORT std::shared_ptr<vsomeip::message> getMessage() const;
+
     COMMONAPI_EXPORT byte_t* getBodyData() const;
     COMMONAPI_EXPORT message_length_t getBodyLength() const;
 
