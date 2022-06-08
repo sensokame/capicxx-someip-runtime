@@ -29,7 +29,7 @@ conan_cmake_install(PATH_OR_REFERENCE .
                     SETTINGS ${settings})
 
 message(info ${COMMONAPI_INCLUDE_DIRS})                 
-message(conan_lib ${CONAN_LIB_DIRS_CommonAPI})                 
+message(conan_lib ${CONAN_LIBS})                 
 find_package(CommonAPI REQUIRED
             PATHS ${CONAN_LIB_DIRS_CommonAPI})
 find_package(vsomeip3 REQUIRED)
