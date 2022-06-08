@@ -28,15 +28,12 @@ conan_cmake_install(PATH_OR_REFERENCE .
                     SETTINGS ${settings})
 
                 
-# Boost
-find_package(VSOMEIP 3.0.0.6 REQUIRED )
-find_package(CommonAPI 3.2.0.3 REQUIRED )
 
-include_directories( ${VSOMEIP_INCLUDE_DIRS} )
-link_directories (${VSOMEIP_LIBRARY_DIRS})
+include_directories( ${CONAN_INCLUDE_DIRS_VSOMEIP} )
+link_directories (${CONAN_LIB_DIRS_VSOMEIP})
 
-include_directories( ${CommonAPI_INCLUDE_DIRS} )
-link_directories (${CommonAPI_LIBRARY_DIRS})
+include_directories( ${CONAN_INCLUDE_DIRS_COMMONAPI} )
+link_directories (${CONAN_LIB_DIRS_COMMONAPI})
 
 
 set (CMAKE_VERBOSE_MAKEFILE off)
