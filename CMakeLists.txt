@@ -27,6 +27,8 @@ conan_cmake_autodetect(settings)
 conan_cmake_install(PATH_OR_REFERENCE .
                     BUILD missing
                     SETTINGS ${settings})
+                    
+message(info ${CONAN_COMMONAPI_ROOT})
 if(TARGET CONANPKG::VSOMEIP)
 message(info "found package")
 endif()
