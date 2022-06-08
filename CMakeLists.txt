@@ -16,7 +16,7 @@ if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
                 "${CMAKE_BINARY_DIR}/conan.cmake"
                 TLS_VERIFY ON)
 endif()
-
+file(COPY ${CMAKE_SOURCE_DIR}/conanbuildinfo.cmake DESTINATION ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_run(REQUIRES VSOMEIP/3.0.0.6
