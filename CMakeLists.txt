@@ -27,10 +27,11 @@ conan_cmake_autodetect(settings)
 conan_cmake_install(PATH_OR_REFERENCE .
                     BUILD missing
                     SETTINGS ${settings})
-                    
-find_package(CommonAPI 3.2.0.3 REQUIRED )
-find_package(vsomeip3 3.0.0.6 REQUIRED )
 
+message(info ${COMMONAPI_INCLUDE_DIRS})                 
+find_package(CommonAPI 3.2.0.3 REQUIRED)
+find_package(vsomeip3 3.0.0.6 REQUIRED)
+message(info ${COMMONAPI_INCLUDE_DIRS})
 
 set (CMAKE_VERBOSE_MAKEFILE off)
 
