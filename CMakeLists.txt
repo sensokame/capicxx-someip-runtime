@@ -7,9 +7,6 @@ cmake_minimum_required (VERSION 2.8)
 
 project (CommonAPI-SomeIP)
 
-include(${CMAKE_SOURCE_DIR}/conanbuildinfo.cmake)
-conan_basic_setup(TARGETS KEEP_RPATHS) # Fill in the parameters you need.
-
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/0.18.1/conan.cmake"
