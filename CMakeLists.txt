@@ -30,12 +30,6 @@ conan_cmake_install(PATH_OR_REFERENCE .
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
-                    
-message(info ${CONAN_COMMONAPI_ROOT})
-if(TARGET CONANPKG::VSOMEIP)
-message(info "found package")
-endif()
-
 
 set (CMAKE_VERBOSE_MAKEFILE off)
 
@@ -122,11 +116,9 @@ foreach (p LIB BIN INCLUDE CMAKE)
 endforeach ()
 
 ###################################################################################################
-message(info ${CONAN_INCLUDE_DIRS_COMMONAPI})
-message(info ${CONAN_INCLUDE_DIRS_VSOMEIP})
 include_directories (
     include
-    ${Boost_INCLUDE_DIR}
+    ${CONAN_INCLUDE_DIRS_BOOST}
     ${CONAN_INCLUDE_DIRS_COMMONAPI}
     ${CONAN_INCLUDE_DIRS_VSOMEIP}
 )
