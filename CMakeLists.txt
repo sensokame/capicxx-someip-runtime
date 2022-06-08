@@ -16,11 +16,16 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
-conan_cmake_run(REQUIRES VSOMEIP/3.0.0.6
+
+conan_cmake_configure(REQUIRES VSOMEIP/3.0.0.6
                 CommonAPI/3.2.0.3
-                BASIC_SETUP CMAKE_TARGETS
-                BUILD missing
+                GENERATORS cmake_find_package
                 )
+conan_cmake_autodetect(settings)
+
+conan_cmake_install(PATH_OR_REFERENCE .
+                    BUILD missing
+                    SETTINGS ${settings})
 
 set (CMAKE_VERBOSE_MAKEFILE off)
 
