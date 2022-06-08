@@ -28,13 +28,6 @@ conan_cmake_install(PATH_OR_REFERENCE .
                     BUILD missing
                     SETTINGS ${settings})
 
-message(info ${COMMONAPI_INCLUDE_DIRS})                 
-message(conan_lib ${CONAN_LIBS})                 
-find_package(CommonAPI REQUIRED
-            PATHS ${CONAN_LIB_DIRS_CommonAPI})
-find_package(vsomeip3 REQUIRED)
-message(info ${COMMONAPI_INCLUDE_DIRS})
-
 set (CMAKE_VERBOSE_MAKEFILE off)
 
 set (LIBCOMMONAPI_SOMEIP_MAJOR_VERSION 3)
@@ -125,8 +118,8 @@ message(info ${VSOMEIP3_INCLUDE_DIRS})
 include_directories (
     include
     ${Boost_INCLUDE_DIR}
-    ${COMMONAPI_INCLUDE_DIRS}
-    ${VSOMEIP3_INCLUDE_DIRS}
+    ${CONAN_INCLUDE_DIRS_COMMONAPI}
+    ${CONAN_INCLUDE_DIRS_VSOMEIP}
 )
 
 file (GLOB CommonAPI-SomeIP_SRC "src/CommonAPI/SomeIP/*.cpp")
