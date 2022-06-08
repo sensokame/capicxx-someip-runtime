@@ -20,7 +20,7 @@ include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_configure(REQUIRES VSOMEIP/3.0.0.6
                 CommonAPI/3.2.0.3
-                GENERATORS cmake_find_package
+                GENERATORS cmake
                 )
 conan_cmake_autodetect(settings)
 
@@ -28,10 +28,10 @@ conan_cmake_install(PATH_OR_REFERENCE .
                     BUILD missing
                     SETTINGS ${settings})
 
-message(info ${COMMONAPI_INCLUDE_DIRS})                 
+message(info ${COMMONAPI_INCLUDE_DIR})                 
 find_package(CommonAPI 3.2.0.3 REQUIRED)
 find_package(vsomeip3 3.0.0.6 REQUIRED)
-message(info ${COMMONAPI_INCLUDE_DIRS})
+message(info ${COMMONAPI_INCLUDE_DIR})
 
 set (CMAKE_VERBOSE_MAKEFILE off)
 
