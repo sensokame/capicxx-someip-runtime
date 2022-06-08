@@ -31,12 +31,6 @@ conan_cmake_install(PATH_OR_REFERENCE .
 find_package(CommonAPI 3.2.0.3 REQUIRED )
 find_package(vsomeip3 3.0.0.6 REQUIRED )
 
-include_directories( ${CONAN_INCLUDE_DIRS_VSOMEIP} )
-link_directories (${CONAN_LIB_DIRS_VSOMEIP})
-
-include_directories( ${CONAN_INCLUDE_DIRS_COMMONAPI} )
-link_directories (${CONAN_LIB_DIRS_COMMONAPI})
-
 
 set (CMAKE_VERBOSE_MAKEFILE off)
 
@@ -123,7 +117,8 @@ foreach (p LIB BIN INCLUDE CMAKE)
 endforeach ()
 
 ###################################################################################################
-
+message(info ${COMMONAPI_INCLUDE_DIRS})
+message(info ${VSOMEIP3_INCLUDE_DIRS})
 include_directories (
     include
     ${Boost_INCLUDE_DIR}
