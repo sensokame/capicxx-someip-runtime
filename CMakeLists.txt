@@ -113,8 +113,8 @@ foreach (p LIB BIN INCLUDE CMAKE)
 endforeach ()
 
 ###################################################################################################
-message(info ${COMMONAPI_INCLUDE_DIRS})
-message(info ${VSOMEIP3_INCLUDE_DIRS})
+message(info ${CONAN_INCLUDE_DIRS_COMMONAPI})
+message(info ${CONAN_INCLUDE_DIRS_VSOMEIP})
 include_directories (
     include
     ${Boost_INCLUDE_DIR}
