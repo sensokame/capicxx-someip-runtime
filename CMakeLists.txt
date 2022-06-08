@@ -28,7 +28,8 @@ conan_cmake_install(PATH_OR_REFERENCE .
                     BUILD missing
                     SETTINGS ${settings})
                     
-find_package(VSOMEIP 3.0.0.6 REQUIRED )
+find_package(CommonAPI 3.2.0.3 REQUIRED )
+find_package(vsomeip3 3.0.0.6 REQUIRED )
 
 include_directories( ${CONAN_INCLUDE_DIRS_VSOMEIP} )
 link_directories (${CONAN_LIB_DIRS_VSOMEIP})
