@@ -27,6 +27,18 @@ conan_cmake_install(PATH_OR_REFERENCE .
                     BUILD missing
                     SETTINGS ${settings})
 
+                
+# Boost
+find_package(VSOMEIP 3.0.0.6 REQUIRED )
+find_package(CommonAPI 3.2.0.3 REQUIRED )
+
+include_directories( ${VSOMEIP_INCLUDE_DIRS} )
+link_directories (${VSOMEIP_LIBRARY_DIRS})
+
+include_directories( ${CommonAPI_INCLUDE_DIRS} )
+link_directories (${CommonAPI_LIBRARY_DIRS})
+
+
 set (CMAKE_VERBOSE_MAKEFILE off)
 
 set (LIBCOMMONAPI_SOMEIP_MAJOR_VERSION 3)
