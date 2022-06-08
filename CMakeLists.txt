@@ -18,7 +18,7 @@ include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_run(REQUIRES CommonAPI/3.2.0.3
                 VSOMEIP/3.0.0.6
-                BASIC_SETUP)
+                BASIC_SETUP CMAKE_TARGETS)
 
 
 message(info ${COMMONAPI_INCLUDE_DIRS})                 
