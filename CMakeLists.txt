@@ -4,7 +4,6 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 cmake_minimum_required (VERSION 2.8)
-set(CMAKE_BUILD_TYPE "Debug")
 
 project (CommonAPI-SomeIP)
 
@@ -17,8 +16,8 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
-conan_cmake_run(REQUIRES VSOMEIP/3.0.0.4
-                CommonAPI/3.2.0.1
+conan_cmake_run(REQUIRES VSOMEIP/3.0.0.6
+                CommonAPI/3.2.0.3
                 BASIC_SETUP CMAKE_TARGETS
                 BUILD missing
                 )
