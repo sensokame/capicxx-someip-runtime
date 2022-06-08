@@ -7,6 +7,8 @@ cmake_minimum_required (VERSION 2.8)
 
 project (CommonAPI-SomeIP)
 
+
+# boost using conan 
 # Download automatically, you can also just copy the conan.cmake file
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
    message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
@@ -16,16 +18,21 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
-conan_cmake_run(REQUIRES CommonAPI/3.2.0.3
-                VSOMEIP/3.0.0.6
-                BASIC_SETUP CMAKE_TARGETS)
+conan_cmake_configure(REQUIRES VSOMEIP/3.0.0.6
+                CommonAPI/3.2.0.3
+                GENERATORS cmake
+                )
+conan_cmake_autodetect(settings)
 
+conan_cmake_install(PATH_OR_REFERENCE .
+                    BUILD missing
+                    SETTINGS ${settings})
 
 message(info ${COMMONAPI_INCLUDE_DIRS})                 
 message(conan_lib ${CONAN_LIB_DIRS_CommonAPI})                 
-find_package(CommonAPI 3.2.0.3 REQUIRED
+find_package(CommonAPI REQUIRED
             PATHS ${CONAN_LIB_DIRS_CommonAPI})
-find_package(vsomeip3 3.0.0.6 REQUIRED)
+find_package(vsomeip3 REQUIRED)
 message(info ${COMMONAPI_INCLUDE_DIRS})
 
 set (CMAKE_VERBOSE_MAKEFILE off)
