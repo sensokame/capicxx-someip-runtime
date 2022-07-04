@@ -7,6 +7,11 @@ cmake_minimum_required (VERSION 2.8)
 
 project (CommonAPI-SomeIP)
 
+set(CMAKE_CXX_STANDARD 20)
+SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
+SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+SET(CMAKE_INSTALL_RPATH "$\{ORIGIN\}")
+
 
 # boost using conan 
 # Download automatically, you can also just copy the conan.cmake file
@@ -18,8 +23,8 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
-conan_cmake_configure(REQUIRES VSOMEIP/3.0.0.6
-                CommonAPI/3.2.0.3
+conan_cmake_configure(REQUIRES VSOMEIP/3.0.0.7
+                CommonAPI/3.2.0.4
                 GENERATORS cmake
                 )
 conan_cmake_autodetect(settings)
