@@ -7,6 +7,7 @@
 
 #include <fcntl.h>
 #include <cstdio>
+#include <iostream>
 
 #ifdef _WIN32
 #include <WinSock2.h>
@@ -232,7 +233,8 @@ void Watch::pushQueue(std::shared_ptr<QueueEntry> _queueEntry) {
 
 #ifdef _WIN32
     // Send an initial buffer
-    char *sendbuf = "1";
+    std::string x("1");
+    const char *sendbuf = x.c_str();
 
     int iResult = send(pipeFileDescriptors_[1], sendbuf, (int)strlen(sendbuf), 0);
     if (iResult == SOCKET_ERROR) {
