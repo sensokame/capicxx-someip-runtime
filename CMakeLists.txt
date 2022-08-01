@@ -24,7 +24,7 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_configure(REQUIRES VSOMEIP/3.0.0.8
-                CommonAPI/3.2.0.4
+                CommonAPI/3.2.0.5
                 GENERATORS cmake
                 )
 conan_cmake_autodetect(settings)
