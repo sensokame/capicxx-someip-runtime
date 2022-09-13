@@ -709,7 +709,7 @@ public:
 
          return (isError);
     }
-
+    COMMONAPI_EXPORT size_t GetRemainingBytesNumber() const { return remaining_; }
 private:
     inline void bitAlign() {
         if (currentBit_ > 0) {
