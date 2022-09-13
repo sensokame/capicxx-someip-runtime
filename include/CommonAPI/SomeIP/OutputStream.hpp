@@ -633,7 +633,7 @@ public:
     COMMONAPI_EXPORT void _writeRawAt(const byte_t *_data, const size_t _size, const size_t _position);
 
     COMMONAPI_EXPORT void _writeBom(const StringDeployment *_depl);
-
+    COMMONAPI_EXPORT size_t getPayloadSize() const { return payload_.size(); }
 protected:
     std::vector<byte_t> payload_;
 
